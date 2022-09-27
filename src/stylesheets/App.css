@@ -31,22 +31,6 @@ h1 {
 
 }
 
-.nav-link {
-    text-decoration: none;
-    color: black;
-    width: 150px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    background-color: #F5EFE6;
-}
-
-.nav-link:hover {
-    background-color: #7895B2;
-}
-
 /* ARTICLES */
 
 .article-list {
@@ -72,22 +56,26 @@ h1 {
 
 .card-title {
     align-self: center;
+    font-size: 1.5em;
 }
 
 
 .article-container {
     display: flex;
     flex-direction: row;
-    align-content: center;
     justify-content: space-around;
     gap: 10px;
-    align-items: flex-end;
+}
+
+.article-container > p {
+    margin: 0 !important;
 }
 
 .article-select {
     background-color: transparent;
     border: none;
     text-decoration: underline;
+    padding: 0;
 }
 
 /* SINGLE ARTICLE */
