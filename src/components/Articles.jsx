@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import { getArticles } from '../utilities/api';
 import { ArticleCard } from './ArticleCard';
 
-export const Articles = () => {
-  const [articles, setArticles] = useState([]);
+export const Articles = ({ articles, setArticles }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
