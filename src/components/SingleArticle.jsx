@@ -5,8 +5,9 @@ import { CommentCard } from './CommentCard';
 import axios from 'axios';
 
 export const SingleArticle = () => {
-  const [article, setArticle] = useState([]);
+  const [article, setArticle] = useState({});
   const [comments, setComments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
 
   useEffect(() => {
@@ -14,10 +15,12 @@ export const SingleArticle = () => {
       axios.spread((...allData) => {
         setArticle(allData[0].article);
         setComments(allData[1].comments);
+        setIsLoading(false);
       })
     );
   }, [article_id]);
 
+  if (isLoading) return <p>Loading...</p>;
   return (
     <section className="article-card-single">
       <div className="single-article-container">
@@ -26,8 +29,7 @@ export const SingleArticle = () => {
         </div>
         <div className="single-inner-container">
           <p>author: {article.author}</p>
-          {/* <p>{article.created_at.slice(0, 10)}</p> */}
-          <p>{article.created_at}</p>
+          <p>{article.created_at.slice(0, 10)}</p>
           <a href="#comments-list">comments: {article.comment_count}</a>
           <p>{article.body}</p>
         </div>

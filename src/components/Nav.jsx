@@ -6,7 +6,7 @@ export const Nav = () => {
       <Link to="/" className="nav-link">
         All Articles
       </Link>
-      <Link className="nav-link" to="/">
+      <Link className="nav-link" to="#">
         Topics
       </Link>
     </nav>

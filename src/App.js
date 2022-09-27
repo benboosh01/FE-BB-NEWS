@@ -11,9 +11,9 @@ function App() {
       <Header />
       <Nav />
       <Routes>
-        <Route path="/" element={<Articles />}></Route>
-        <Route path="/articles" element={<Articles />}></Route>
-        <Route path="/articles/:article_id" element={<SingleArticle />}></Route>
+        <Route path="/" element={<Articles />} />
+        <Route path="/articles" element={<Articles />} />
+        <Route path="/articles/:article_id" element={<SingleArticle />} />
       </Routes>
     </div>
   );

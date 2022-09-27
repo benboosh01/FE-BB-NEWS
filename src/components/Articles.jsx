@@ -4,13 +4,16 @@ import { ArticleCard } from './ArticleCard';
 
 export const Articles = () => {
   const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getArticles().then(({ articles }) => {
       setArticles(articles);
+      setIsLoading(false);
     });
   }, []);
 
+  if (isLoading) return <p>Loading...</p>;
   return (
     <ul className="article-list">
       {articles.map((article) => {
