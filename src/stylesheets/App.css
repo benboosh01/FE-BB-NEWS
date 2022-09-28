@@ -78,6 +78,12 @@ h1 {
     padding: 0;
 }
 
+.topic-title {
+    padding: 10px 0;
+    background-color: #7895B2;
+    margin: 10px 0;
+}
+
 /* SINGLE ARTICLE */
 
 .article-card-single {

@@ -14,10 +14,15 @@ export const Articles = ({ articles, setArticles }) => {
 
   if (isLoading) return <p>Loading...</p>;
   return (
-    <ul className="article-list">
-      {articles.map((article) => {
-        return <ArticleCard key={article.article_id} article={article} />;
-      })}
-    </ul>
+    <section>
+      <div className="topic-title">
+        <h2>All Topics</h2>
+      </div>
+      <ul className="article-list">
+        {articles.map((article) => {
+          return <ArticleCard key={article.article_id} article={article} />;
+        })}
+      </ul>
+    </section>
   );
 };

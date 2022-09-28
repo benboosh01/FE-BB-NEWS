@@ -16,10 +16,17 @@ export const SingleTopic = ({ articles, setArticles }) => {
 
   if (isLoading) return <p>Loading...</p>;
   return (
-    <ul className="article-list">
-      {articles.map((article) => {
-        return <ArticleCard key={article.article_id} article={article} />;
-      })}
-    </ul>
+    <section>
+      <div className="topic-title">
+        <h2>
+          {topic_slug[0].toUpperCase() + topic_slug.substring(1)} Articles
+        </h2>
+      </div>
+      <ul className="article-list">
+        {articles.map((article) => {
+          return <ArticleCard key={article.article_id} article={article} />;
+        })}
+      </ul>
+    </section>
   );
 };
