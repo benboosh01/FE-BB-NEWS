@@ -33,3 +33,9 @@ export const getArticlesByTopic = (topic_slug) => {
     return res.data;
   });
 };
+
+export const patchArticleVotes = (article_id, votes) => {
+  return newsApi.patch(`articles/${article_id}`, votes).then((res) => {
+    return res.data;
+  });
+};
