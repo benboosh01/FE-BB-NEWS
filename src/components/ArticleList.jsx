@@ -12,9 +12,8 @@ export const ArticleList = ({
 }) => {
   const sortOptions = [
     { value: '', text: 'Sort' },
-    { value: 'title', text: 'Title' },
-    { value: 'topic', text: 'Topic' },
-    { value: 'author', text: 'Author' },
+    { value: 'votes', text: 'Votes' },
+    { value: 'comment_count', text: 'Comments' },
     { value: 'created_at', text: 'Date' },
   ];
 
