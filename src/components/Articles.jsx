@@ -1,28 +1,39 @@
 import { useState, useEffect } from 'react';
 import { getArticles } from '../utilities/api';
-import { ArticleCard } from './ArticleCard';
+import { ArticleList } from './ArticleList';
 
-export const Articles = ({ articles, setArticles }) => {
+export const Articles = ({
+  articles,
+  setArticles,
+  setParams,
+  params,
+  sort,
+  setSort,
+  order,
+  setOrder,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getArticles().then(({ articles }) => {
+    const sortBy = params.sort_by;
+    const order = params.order;
+    setIsLoading(true);
+    getArticles(null, sortBy, order).then(({ articles }) => {
       setArticles(articles);
       setIsLoading(false);
     });
-  }, []);
+  }, [params]);
 
-  if (isLoading) return <p>Loading...</p>;
   return (
-    <section>
-      <div className="topic-title">
-        <h2>All Topics</h2>
-      </div>
-      <ul className="article-list">
-        {articles.map((article) => {
-          return <ArticleCard key={article.article_id} article={article} />;
-        })}
-      </ul>
-    </section>
+    <ArticleList
+      params={params}
+      setParams={setParams}
+      articles={articles}
+      isLoading={isLoading}
+      sort={sort}
+      setSort={setSort}
+      order={order}
+      setOrder={setOrder}
+    />
   );
 };
