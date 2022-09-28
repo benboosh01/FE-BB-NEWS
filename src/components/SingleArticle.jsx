@@ -1,8 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getArticle, getArticleComments } from '../utilities/api';
+import {
+  getArticle,
+  getArticleComments,
+  patchArticleVotes,
+} from '../utilities/api';
 import { CommentCard } from './CommentCard';
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
 
 export const SingleArticle = () => {
   const [article, setArticle] = useState({});
@@ -20,6 +25,30 @@ export const SingleArticle = () => {
     );
   }, [article_id]);
 
+  const handleVote = (event) => {
+    const article_id = event.target.value;
+    const vote = event.target.id;
+    if (vote === 'vote-up') {
+      setArticle((currArticle) => {
+        return { ...currArticle, votes: currArticle.votes + 1 };
+      });
+      patchArticleVotes(article_id, { inc_votes: 1 }).catch((err) => {
+        setArticle((currArticle) => {
+          return { ...currArticle, votes: currArticle.votes - 1 };
+        });
+      });
+    } else {
+      patchArticleVotes(article_id, { inc_votes: -1 }).catch((err) => {
+        setArticle((currArticle) => {
+          return { ...currArticle, votes: currArticle.votes + 1 };
+        });
+      });
+      setArticle((currArticle) => {
+        return { ...currArticle, votes: currArticle.votes - 1 };
+      });
+    }
+  };
+
   if (isLoading) return <p>Loading...</p>;
   return (
     <section className="article-card-single">
@@ -32,6 +61,25 @@ export const SingleArticle = () => {
           <p>{article.created_at.slice(0, 10)}</p>
           <a href="#comments-list">comments: {article.comment_count}</a>
           <p>{article.body}</p>
+          <div>
+            <p>{article.votes}</p>
+            <Button
+              variant="danger"
+              value={article.article_id}
+              onClick={handleVote}
+              id="vote-down"
+            >
+              Down
+            </Button>
+            <Button
+              variant="success"
+              value={article.article_id}
+              onClick={handleVote}
+              id="vote-up"
+            >
+              Up
+            </Button>
+          </div>
         </div>
       </div>
       <div className="article-comments-container">
