@@ -131,7 +131,7 @@ export const SingleArticle = () => {
             Submit
           </button>
         </form>
-        <hr />
+        <hr className="comment-form-divider" />
         <ul className="comments-list" id="comments-list">
           {comments.map((comment) => {
             return <CommentCard key={comment.comment_id} comment={comment} />;

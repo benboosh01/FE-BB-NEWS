@@ -99,6 +99,7 @@ h1 {
 .single-article-title {
     background-color: #F0F0F0;
     padding: 30px 0;
+    border-radius: 10px 10px 0 0;
 }
 
 .single-inner-container {
@@ -126,6 +127,7 @@ h1 {
 .comments-title {
     padding: 30px 0;
     background-color: #F0F0F0;
+    border-radius: 10px 10px 0 0;
 }
 
 .comment-card > hr {
@@ -137,6 +139,10 @@ h1 {
     flex-direction: column;
     padding: 10px;
     gap: 10px;
+}
+
+.comment-form-divider {
+    margin: 20px 15px;
 }
 
 @media only screen and (min-width: 768px) {
