@@ -18,6 +18,7 @@ export const SingleArticle = () => {
   const [newComment, setNewComment] = useState('');
   const { article_id } = useParams();
   const { loggedInUser } = useContext(UserContext);
+  const [disable, setDisable] = useState(false);
 
   useEffect(() => {
     axios.all([getArticle(article_id), getArticleComments(article_id)]).then(
@@ -59,6 +60,7 @@ export const SingleArticle = () => {
 
   const handleComment = (event) => {
     event.preventDefault();
+    setDisable(true);
     postArticleComment(article_id, {
       username: loggedInUser.username,
       body: newComment,
@@ -70,6 +72,7 @@ export const SingleArticle = () => {
       })
       .then(() => {
         setNewComment('');
+        setDisable(false);
       });
   };
 
@@ -119,7 +122,12 @@ export const SingleArticle = () => {
             value={newComment}
             required
           />
-          <button className="comment-btn" type="submit">
+          <button
+            className="comment-btn"
+            type="submit"
+            id="comment-btn"
+            disabled={disable}
+          >
             Submit
           </button>
         </form>
