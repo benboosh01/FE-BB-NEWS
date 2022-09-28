@@ -1,19 +1,24 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {
   getArticle,
   getArticleComments,
   patchArticleVotes,
+  postArticleComment,
 } from '../utilities/api';
 import { CommentCard } from './CommentCard';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
+import { UserContext } from '../contexts/User';
 
 export const SingleArticle = () => {
   const [article, setArticle] = useState({});
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [newComment, setNewComment] = useState('');
   const { article_id } = useParams();
+  const { loggedInUser } = useContext(UserContext);
+  const [disable, setDisable] = useState(false);
 
   useEffect(() => {
     axios.all([getArticle(article_id), getArticleComments(article_id)]).then(
@@ -47,6 +52,28 @@ export const SingleArticle = () => {
         return { ...currArticle, votes: currArticle.votes - 1 };
       });
     }
+  };
+
+  const handleChange = (event) => {
+    setNewComment(event.target.value);
+  };
+
+  const handleComment = (event) => {
+    event.preventDefault();
+    setDisable(true);
+    postArticleComment(article_id, {
+      username: loggedInUser.username,
+      body: newComment,
+    })
+      .then(({ comment }) => {
+        setComments((currComments) => {
+          return [comment, ...currComments];
+        });
+      })
+      .then(() => {
+        setNewComment('');
+        setDisable(false);
+      });
   };
 
   if (isLoading) return <p>Loading...</p>;
@@ -86,6 +113,25 @@ export const SingleArticle = () => {
         <div className="comments-title">
           <h3>Comments</h3>
         </div>
+        <form action="submit" className="comment-form" onSubmit={handleComment}>
+          <label htmlFor="add-comment">Add Comment:</label>
+          <textarea
+            id="add-comment"
+            rows={5}
+            onChange={handleChange}
+            value={newComment}
+            required
+          />
+          <button
+            className="comment-btn"
+            type="submit"
+            id="comment-btn"
+            disabled={disable}
+          >
+            Submit
+          </button>
+        </form>
+        <hr />
         <ul className="comments-list" id="comments-list">
           {comments.map((comment) => {
             return <CommentCard key={comment.comment_id} comment={comment} />;
