@@ -1,9 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import { UserContext } from '../contexts/User';
 import { useContext, useState } from 'react';
-import { deleteComment } from '../utilities/api';
+import { deleteComment, getArticleComments } from '../utilities/api';
 
-export const CommentCard = ({ comment, setComments }) => {
+export const CommentCard = ({ comment, setComments, article_id }) => {
   const { loggedInUser } = useContext(UserContext);
   const [disable, setDisable] = useState(false);
 
@@ -12,13 +12,17 @@ export const CommentCard = ({ comment, setComments }) => {
     const comment_id = event.target.value;
     const username = event.target.id;
     if (loggedInUser.username === username) {
-      deleteComment(comment_id).then(() => {
-        setComments((currComments) => {
-          return currComments.filter((comment) => {
-            if (comment.comment_id !== parseInt(comment_id)) {
-              return comment;
-            }
-          });
+      setComments((currComments) => {
+        return currComments.filter((comment) => {
+          if (comment.comment_id !== parseInt(comment_id)) {
+            return comment;
+          }
+        });
+      });
+      deleteComment(comment_id).catch((err) => {
+        alert('Comment not deleted, please try again');
+        getArticleComments(article_id).then(({ comments }) => {
+          setComments(comments);
         });
       });
     }

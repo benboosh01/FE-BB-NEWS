@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './stylesheets/App.css';
 import { Header } from './components/Header';
 import { Articles } from './components/Articles';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 import { SingleArticle } from './components/SingleArticle';
 import { MainNav } from './components/MainNav';
 import { SingleTopic } from './components/SingleTopic';

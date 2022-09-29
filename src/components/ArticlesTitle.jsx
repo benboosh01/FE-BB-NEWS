@@ -32,12 +32,7 @@ export const ArticlesTitle = ({
   };
 
   return (
-    <section className="topic-title">
-      <h2>
-        {topic_slug
-          ? `${topic_slug[0].toUpperCase() + topic_slug.substring(1)} Articles`
-          : 'All Articles'}
-      </h2>
+    <section className="sort-section">
       <label htmlFor="sort-by">Sort</label>
       <select
         name="sort-columns"

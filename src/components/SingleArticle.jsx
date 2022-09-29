@@ -140,6 +140,7 @@ export const SingleArticle = () => {
                 comment={comment}
                 setComments={setComments}
                 comments={comments}
+                article_id={article_id}
               />
             );
           })}

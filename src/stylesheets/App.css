@@ -78,14 +78,20 @@ h1 {
     padding: 0;
 }
 
-.topic-title {
+.sort-section {
     padding: 10px 0;
     background-color: #7895B2;
     margin: 10px 0;
 }
 
-.topic-title > label {
+.sort-section > label {
     margin: 0 10px  ;
+}
+
+.topic-title {
+    padding: 10px 0;
+    background-color: #AEBDCA;
+    margin: 10px 0;
 }
 
 /* SINGLE ARTICLE */
