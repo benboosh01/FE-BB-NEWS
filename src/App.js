@@ -7,18 +7,26 @@ import { SingleArticle } from './components/SingleArticle';
 import { MainNav } from './components/MainNav';
 import { SingleTopic } from './components/SingleTopic';
 import { useState } from 'react';
+import { ArticlesTitle } from './components/ArticlesTitle';
 
 function App() {
   const [articles, setArticles] = useState([]);
-  const [topic, setTopic] = useState('');
   const [params, setParams] = useState({});
-  const [sort, setSort] = useState({ value: '', text: 'Sort' });
-  const [order, setOrder] = useState({ value: '', text: 'Order' });
+  const [topic, setTopic] = useState('');
+  const [sort, setSort] = useState('created_at');
+  const [order, setOrder] = useState('DESC');
 
   return (
     <div className="App">
       <Header />
       <MainNav topic={topic} setTopic={setTopic} />
+      <ArticlesTitle
+        setParams={setParams}
+        sort={sort}
+        setSort={setSort}
+        order={order}
+        setOrder={setOrder}
+      />
       <Routes>
         <Route
           path="/"
@@ -26,12 +34,7 @@ function App() {
             <Articles
               articles={articles}
               setArticles={setArticles}
-              setParams={setParams}
               params={params}
-              sort={sort}
-              setSort={setSort}
-              order={order}
-              setOrder={setOrder}
             />
           }
         />
@@ -41,12 +44,7 @@ function App() {
             <Articles
               articles={articles}
               setArticles={setArticles}
-              setParams={setParams}
               params={params}
-              sort={sort}
-              setSort={setSort}
-              order={order}
-              setOrder={setOrder}
             />
           }
         />
@@ -57,12 +55,8 @@ function App() {
             <SingleTopic
               articles={articles}
               setArticles={setArticles}
-              setParams={setParams}
               params={params}
-              sort={sort}
-              setSort={setSort}
-              order={order}
-              setOrder={setOrder}
+              topic={topic}
             />
           }
         />
@@ -72,12 +66,7 @@ function App() {
             <Articles
               articles={articles}
               setArticles={setArticles}
-              setParams={setParams}
               params={params}
-              sort={sort}
-              setSort={setSort}
-              order={order}
-              setOrder={setOrder}
             />
           }
         />

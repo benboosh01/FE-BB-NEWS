@@ -2,16 +2,7 @@ import { useState, useEffect } from 'react';
 import { getArticles } from '../utilities/api';
 import { ArticleList } from './ArticleList';
 
-export const Articles = ({
-  articles,
-  setArticles,
-  setParams,
-  params,
-  sort,
-  setSort,
-  order,
-  setOrder,
-}) => {
+export const Articles = ({ articles, setArticles, params }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -25,15 +16,8 @@ export const Articles = ({
   }, [params]);
 
   return (
-    <ArticleList
-      params={params}
-      setParams={setParams}
-      articles={articles}
-      isLoading={isLoading}
-      sort={sort}
-      setSort={setSort}
-      order={order}
-      setOrder={setOrder}
-    />
+    <section>
+      <ArticleList articles={articles} isLoading={isLoading} />
+    </section>
   );
 };
