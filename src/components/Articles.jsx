@@ -13,7 +13,7 @@ export const Articles = ({ articles, setArticles, params }) => {
       setArticles(articles);
       setIsLoading(false);
     });
-  }, [params]);
+  }, [setArticles, params]);
 
   return (
     <section>
