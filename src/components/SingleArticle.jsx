@@ -134,7 +134,14 @@ export const SingleArticle = () => {
         <hr className="comment-form-divider" />
         <ul className="comments-list" id="comments-list">
           {comments.map((comment) => {
-            return <CommentCard key={comment.comment_id} comment={comment} />;
+            return (
+              <CommentCard
+                key={comment.comment_id}
+                comment={comment}
+                setComments={setComments}
+                comments={comments}
+              />
+            );
           })}
         </ul>
       </div>
