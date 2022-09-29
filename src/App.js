@@ -8,6 +8,7 @@ import { MainNav } from './components/MainNav';
 import { SingleTopic } from './components/SingleTopic';
 import { useState } from 'react';
 import { ArticlesTitle } from './components/ArticlesTitle';
+import { ErrorPage } from './components/ErrorPage';
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -58,16 +59,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="/*"
-          element={
-            <Articles
-              articles={articles}
-              setArticles={setArticles}
-              params={params}
-            />
-          }
-        />
+        <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </div>
   );
