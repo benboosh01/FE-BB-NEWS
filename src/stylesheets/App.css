@@ -84,6 +84,10 @@ h1 {
     margin: 10px 0;
 }
 
+.topic-title > label {
+    margin: 0 10px  ;
+}
+
 /* SINGLE ARTICLE */
 
 .article-card-single {

@@ -13,8 +13,12 @@ export const ArticleCard = ({ article }) => {
     <li className="article-card">
       <h2 className="card-title">{article.title}</h2>
       <div className="article-container">
-        <p>{article.author}</p>
         <p>{article.created_at.slice(0, 10)}</p>
+        <p>votes: {article.votes}</p>
+        <p>comments: {article.comment_count}</p>
+      </div>
+      <div className="article-container">
+        <p>{article.author}</p>
         <button
           value={article.article_id}
           onClick={handleSelection}

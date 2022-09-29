@@ -6,7 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { LinkContainer } from 'react-router-bootstrap';
 
-export const MainNav = () => {
+export const MainNav = ({ topic, setTopic }) => {
   const [topics, setTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

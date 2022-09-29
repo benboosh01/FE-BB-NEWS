@@ -10,30 +10,76 @@ import { useState } from 'react';
 
 function App() {
   const [articles, setArticles] = useState([]);
+  const [topic, setTopic] = useState('');
+  const [params, setParams] = useState({});
+  const [sort, setSort] = useState({ value: '', text: 'Sort' });
+  const [order, setOrder] = useState({ value: '', text: 'Order' });
 
   return (
     <div className="App">
       <Header />
-      <MainNav />
+      <MainNav topic={topic} setTopic={setTopic} />
       <Routes>
         <Route
           path="/"
-          element={<Articles articles={articles} setArticles={setArticles} />}
+          element={
+            <Articles
+              articles={articles}
+              setArticles={setArticles}
+              setParams={setParams}
+              params={params}
+              sort={sort}
+              setSort={setSort}
+              order={order}
+              setOrder={setOrder}
+            />
+          }
         />
         <Route
           path="/articles"
-          element={<Articles articles={articles} setArticles={setArticles} />}
+          element={
+            <Articles
+              articles={articles}
+              setArticles={setArticles}
+              setParams={setParams}
+              params={params}
+              sort={sort}
+              setSort={setSort}
+              order={order}
+              setOrder={setOrder}
+            />
+          }
         />
         <Route path="/articles/:article_id" element={<SingleArticle />} />
         <Route
           path="/:topic_slug/articles"
           element={
-            <SingleTopic articles={articles} setArticles={setArticles} />
+            <SingleTopic
+              articles={articles}
+              setArticles={setArticles}
+              setParams={setParams}
+              params={params}
+              sort={sort}
+              setSort={setSort}
+              order={order}
+              setOrder={setOrder}
+            />
           }
         />
         <Route
           path="/*"
-          element={<Articles articles={articles} setArticles={setArticles} />}
+          element={
+            <Articles
+              articles={articles}
+              setArticles={setArticles}
+              setParams={setParams}
+              params={params}
+              sort={sort}
+              setSort={setSort}
+              order={order}
+              setOrder={setOrder}
+            />
+          }
         />
       </Routes>
     </div>
