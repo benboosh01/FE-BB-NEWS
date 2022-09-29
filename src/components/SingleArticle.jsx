@@ -10,6 +10,7 @@ import { CommentCard } from './CommentCard';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import { UserContext } from '../contexts/User';
+import { ErrorPage } from './ErrorPage';
 
 export const SingleArticle = () => {
   const [article, setArticle] = useState({});
@@ -19,15 +20,21 @@ export const SingleArticle = () => {
   const { article_id } = useParams();
   const { loggedInUser } = useContext(UserContext);
   const [disable, setDisable] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.all([getArticle(article_id), getArticleComments(article_id)]).then(
-      axios.spread((...allData) => {
-        setArticle(allData[0].article);
-        setComments(allData[1].comments);
-        setIsLoading(false);
-      })
-    );
+    axios
+      .all([getArticle(article_id), getArticleComments(article_id)])
+      .then(
+        axios.spread((...allData) => {
+          setArticle(allData[0].article);
+          setComments(allData[1].comments);
+          setIsLoading(false);
+        })
+      )
+      .catch((err) => {
+        setError(err.response.data.msg);
+      });
   }, [article_id]);
 
   const handleVote = (event) => {
@@ -76,7 +83,9 @@ export const SingleArticle = () => {
       });
   };
 
+  if (error) return <ErrorPage message={error} />;
   if (isLoading) return <p>Loading...</p>;
+
   return (
     <section className="article-card-single">
       <div className="single-article-container">
