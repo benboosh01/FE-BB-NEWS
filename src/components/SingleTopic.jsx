@@ -19,12 +19,10 @@ export const SingleTopic = ({ articles, setArticles, params }) => {
 
   if (isLoading) return <p>Loading...</p>;
   return (
-    <section>
-      <ArticleList
-        topic_slug={topic_slug}
-        articles={articles}
-        isLoading={isLoading}
-      />
-    </section>
+    <ArticleList
+      topic_slug={topic_slug}
+      articles={articles}
+      isLoading={isLoading}
+    />
   );
 };

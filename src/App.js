@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './stylesheets/App.css';
 import { Header } from './components/Header';
 import { Articles } from './components/Articles';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 import { SingleArticle } from './components/SingleArticle';
 import { MainNav } from './components/MainNav';
 import { SingleTopic } from './components/SingleTopic';
@@ -12,14 +12,13 @@ import { ArticlesTitle } from './components/ArticlesTitle';
 function App() {
   const [articles, setArticles] = useState([]);
   const [params, setParams] = useState({});
-  const [topic, setTopic] = useState('');
   const [sort, setSort] = useState('created_at');
   const [order, setOrder] = useState('DESC');
 
   return (
     <div className="App">
       <Header />
-      <MainNav topic={topic} setTopic={setTopic} />
+      <MainNav />
       <ArticlesTitle
         setParams={setParams}
         sort={sort}
@@ -56,7 +55,6 @@ function App() {
               articles={articles}
               setArticles={setArticles}
               params={params}
-              topic={topic}
             />
           }
         />
