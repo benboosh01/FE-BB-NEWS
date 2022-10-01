@@ -15,9 +15,6 @@ export const Articles = ({ articles, setArticles, params }) => {
     });
   }, [setArticles, params]);
 
-  return (
-    <section>
-      <ArticleList articles={articles} isLoading={isLoading} />
-    </section>
-  );
+  if (isLoading) return <p>Loading...</p>;
+  return <ArticleList articles={articles} />;
 };

@@ -5,8 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { LinkContainer } from 'react-router-bootstrap';
-
-export const MainNav = ({}) => {
+export const MainNav = () => {
   const [topics, setTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -22,7 +21,7 @@ export const MainNav = ({}) => {
     <Navbar bg="secondary" expand="lg">
       <Container fluid>
         <Nav className="me-auto">
-          <LinkContainer to={'/articles'}>
+          <LinkContainer to="/articles">
             <Nav.Link className="text-light">All Articles</Nav.Link>
           </LinkContainer>
           <NavDropdown
@@ -31,7 +30,10 @@ export const MainNav = ({}) => {
           >
             {topics.map((topic) => {
               return (
-                <LinkContainer key={topic.slug} to={`${topic.slug}/articles`}>
+                <LinkContainer
+                  key={topic.slug}
+                  to={`/articles/topic/${topic.slug}`}
+                >
                   <NavDropdown.Item>{topic.slug}</NavDropdown.Item>
                 </LinkContainer>
               );
