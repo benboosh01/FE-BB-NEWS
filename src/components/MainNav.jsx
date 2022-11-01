@@ -5,9 +5,18 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { LinkContainer } from 'react-router-bootstrap';
-export const MainNav = () => {
+export const MainNav = ({
+  setParams,
+  sort,
+  setSort,
+  order,
+  setOrder,
+  params,
+}) => {
   const [topics, setTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [sortSelected, setSortSelected] =
+    useState[{ value: 'created_at', text: 'Date' }];
 
   useEffect(() => {
     getTopics().then(({ topics }) => {
@@ -16,30 +25,95 @@ export const MainNav = () => {
     });
   }, []);
 
+  const sortOptions = [
+    { value: 'created_at', text: 'Date' },
+    { value: 'votes', text: 'Votes' },
+    { value: 'comment_count', text: 'Comments' },
+  ];
+
+  const orderOptions = [
+    { value: 'DESC', text: 'DESC' },
+    { value: 'ASC', text: 'ASC' },
+  ];
+
+  const handleSort = (event) => {
+    setSort(event);
+    setParams((currParams) => {
+      return { ...currParams, sort_by: event };
+    });
+  };
+
+  const handleOrder = (event) => {
+    setOrder(event);
+    setParams((currParams) => {
+      return { ...currParams, order: event };
+    });
+  };
+
   if (isLoading) return <p>Loading Navigation Menu....</p>;
   return (
-    <Navbar bg="secondary" expand="lg">
+    <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Nav className="me-auto">
-          <LinkContainer to="/articles">
-            <Nav.Link className="text-light">All Articles</Nav.Link>
-          </LinkContainer>
-          <NavDropdown
-            title={<span className="text-light">Topics</span>}
-            id="basic-nav-dropdown"
-          >
-            {topics.map((topic) => {
-              return (
-                <LinkContainer
-                  key={topic.slug}
-                  to={`/articles/topic/${topic.slug}`}
-                >
-                  <NavDropdown.Item>{topic.slug}</NavDropdown.Item>
-                </LinkContainer>
-              );
-            })}
-          </NavDropdown>
-        </Nav>
+        <LinkContainer to="/articles">
+          <Navbar.Brand>BB News</Navbar.Brand>
+        </LinkContainer>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav className="me-auto">
+            <LinkContainer to="/articles">
+              <Nav.Link>All Articles</Nav.Link>
+            </LinkContainer>
+            <NavDropdown title={<span>Topics</span>} id="basic-nav-dropdown">
+              {topics.map((topic) => {
+                return (
+                  <LinkContainer
+                    key={topic.slug}
+                    to={`/articles/topic/${topic.slug}`}
+                  >
+                    <NavDropdown.Item>
+                      {topic.slug.slice(0, 1).toUpperCase() +
+                        topic.slug.slice(1)}
+                    </NavDropdown.Item>
+                  </LinkContainer>
+                );
+              })}
+            </NavDropdown>
+            <NavDropdown
+              title={<span>Sort: {sortSelected[0].text}</span>}
+              id="basic-nav-dropdown"
+              onSelect={handleSort}
+            >
+              {sortOptions.map((option) => {
+                return (
+                  <NavDropdown.Item
+                    key={option.value}
+                    eventKey={option.value}
+                    value={option.value}
+                  >
+                    {option.text}
+                  </NavDropdown.Item>
+                );
+              })}
+            </NavDropdown>
+            <NavDropdown
+              title={<span>Order</span>}
+              id="basic-nav-dropdown"
+              onSelect={handleOrder}
+            >
+              {orderOptions.map((option) => {
+                return (
+                  <NavDropdown.Item
+                    key={option.value}
+                    eventKey={option.value}
+                    value={option.value}
+                  >
+                    {option.text}
+                  </NavDropdown.Item>
+                );
+              })}
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

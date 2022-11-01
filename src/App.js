@@ -1,13 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './stylesheets/App.css';
-import { Header } from './components/Header';
 import { Articles } from './components/Articles';
 import { Routes, Route } from 'react-router-dom';
 import { SingleArticle } from './components/SingleArticle';
 import { MainNav } from './components/MainNav';
 import { SingleTopic } from './components/SingleTopic';
 import { useState } from 'react';
-import { ArticlesTitle } from './components/ArticlesTitle';
 import { ErrorPage } from './components/ErrorPage';
 import { Home } from './components/Home';
 
@@ -19,14 +17,13 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <MainNav />
-      <ArticlesTitle
+      <MainNav
         setParams={setParams}
         sort={sort}
         setSort={setSort}
         order={order}
         setOrder={setOrder}
+        params={params}
       />
       <Routes>
         <Route
