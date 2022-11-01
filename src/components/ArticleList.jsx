@@ -1,7 +1,6 @@
 import { ArticleCard } from './ArticleCard';
 
-export const ArticleList = ({ isLoading, articles, topic_slug }) => {
-  if (isLoading) return <p>Loading...</p>;
+export const ArticleList = ({ articles, topic_slug }) => {
   return (
     <section>
       <h2 className="topic-title">

@@ -9,6 +9,7 @@ import { SingleTopic } from './components/SingleTopic';
 import { useState } from 'react';
 import { ArticlesTitle } from './components/ArticlesTitle';
 import { ErrorPage } from './components/ErrorPage';
+import { Home } from './components/Home';
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -30,36 +31,32 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            <Articles
-              articles={articles}
-              setArticles={setArticles}
-              params={params}
-            />
-          }
+          element={<Home articles={articles} setArticles={setArticles} />}
         />
-        <Route
-          path="/articles"
-          element={
-            <Articles
-              articles={articles}
-              setArticles={setArticles}
-              params={params}
-            />
-          }
-        />
-        <Route path="/articles/:article_id" element={<SingleArticle />} />
-        <Route
-          path="/:topic_slug/articles"
-          element={
-            <SingleTopic
-              articles={articles}
-              setArticles={setArticles}
-              params={params}
-            />
-          }
-        />
-        <Route path="/*" element={<ErrorPage />} />
+        <Route path="articles">
+          <Route
+            index
+            element={
+              <Articles
+                articles={articles}
+                setArticles={setArticles}
+                params={params}
+              />
+            }
+          />
+          <Route path=":article_id" element={<SingleArticle />} />
+          <Route
+            path="topic/:topic_slug"
+            element={
+              <SingleTopic
+                articles={articles}
+                setArticles={setArticles}
+                params={params}
+              />
+            }
+          />
+        </Route>
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
   );

@@ -33,7 +33,21 @@ h1 {
 
 /* ARTICLES */
 
+.articles-section {
+    display: flex;
+    justify-content: center;
+}
+
 .article-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.home-article-list {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -168,6 +182,16 @@ h1 {
         justify-content: center;
         flex-direction: row;
         flex-wrap: wrap;
+    }
+
+    .home-article-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        max-width: 768px;
+    }
+
+    .article-card {
+        grid-column: 0 / 4;
     }
 }
 
