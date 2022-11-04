@@ -5,18 +5,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { LinkContainer } from 'react-router-bootstrap';
-export const MainNav = ({
-  setParams,
-  sort,
-  setSort,
-  order,
-  setOrder,
-  params,
-}) => {
+export const MainNav = ({ setSort, setOrder }) => {
   const [topics, setTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [sortSelected, setSortSelected] =
-    useState[{ value: 'created_at', text: 'Date' }];
 
   useEffect(() => {
     getTopics().then(({ topics }) => {
@@ -38,23 +29,17 @@ export const MainNav = ({
 
   const handleSort = (event) => {
     setSort(event);
-    setParams((currParams) => {
-      return { ...currParams, sort_by: event };
-    });
   };
 
   const handleOrder = (event) => {
     setOrder(event);
-    setParams((currParams) => {
-      return { ...currParams, order: event };
-    });
   };
 
   if (isLoading) return <p>Loading Navigation Menu....</p>;
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <LinkContainer to="/articles">
+        <LinkContainer to="/">
           <Navbar.Brand>BB News</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -79,7 +64,7 @@ export const MainNav = ({
               })}
             </NavDropdown>
             <NavDropdown
-              title={<span>Sort: {sortSelected[0].text}</span>}
+              title={<span>Sort</span>}
               id="basic-nav-dropdown"
               onSelect={handleSort}
             >

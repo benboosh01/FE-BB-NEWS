@@ -11,19 +11,16 @@ import { Home } from './components/Home';
 
 function App() {
   const [articles, setArticles] = useState([]);
-  const [params, setParams] = useState({});
   const [sort, setSort] = useState('created_at');
   const [order, setOrder] = useState('DESC');
 
   return (
     <div className="App">
       <MainNav
-        setParams={setParams}
         sort={sort}
         setSort={setSort}
         order={order}
         setOrder={setOrder}
-        params={params}
       />
       <Routes>
         <Route
@@ -37,7 +34,8 @@ function App() {
               <Articles
                 articles={articles}
                 setArticles={setArticles}
-                params={params}
+                sort={sort}
+                order={order}
               />
             }
           />
@@ -48,7 +46,8 @@ function App() {
               <SingleTopic
                 articles={articles}
                 setArticles={setArticles}
-                params={params}
+                order={order}
+                sort={sort}
               />
             }
           />
