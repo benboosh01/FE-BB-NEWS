@@ -8,7 +8,7 @@ export const ArticleList = ({ articles, topic_slug }) => {
           ? `${topic_slug[0].toUpperCase() + topic_slug.substring(1)} Articles`
           : 'All Articles'}
       </h2>
-      <ul className="d-flex flex-wrap justify-content-center gap-3">
+      <ul className="d-flex flex-wrap justify-content-center gap-3 ps-0">
         {articles.map((article) => {
           return <ArticleCard key={article.article_id} article={article} />;
         })}

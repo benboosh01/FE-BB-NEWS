@@ -14,5 +14,9 @@ export const Articles = ({ articles, setArticles, order, sort }) => {
   }, [order, sort]);
 
   if (isLoading) return <p>Loading...</p>;
-  return <ArticleList articles={articles} />;
+  return (
+    <section>
+      <ArticleList articles={articles} />;
+    </section>
+  );
 };

@@ -8,6 +8,7 @@ import { SingleTopic } from './components/SingleTopic';
 import { useState } from 'react';
 import { ErrorPage } from './components/ErrorPage';
 import { Home } from './components/Home';
+import { SortNav } from './components/SortNav';
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -31,24 +32,32 @@ function App() {
           <Route
             index
             element={
-              <Articles
-                articles={articles}
-                setArticles={setArticles}
-                sort={sort}
-                order={order}
-              />
+              <>
+                <SortNav setSort={setSort} setOrder={setOrder} />
+                <Articles
+                  articles={articles}
+                  setArticles={setArticles}
+                  setOrder={setOrder}
+                  setSort={setSort}
+                  sort={sort}
+                  order={order}
+                />
+              </>
             }
           />
           <Route path=":article_id" element={<SingleArticle />} />
           <Route
             path="topic/:topic_slug"
             element={
-              <SingleTopic
-                articles={articles}
-                setArticles={setArticles}
-                order={order}
-                sort={sort}
-              />
+              <>
+                <SortNav setSort={setSort} setOrder={setOrder} />
+                <SingleTopic
+                  articles={articles}
+                  setArticles={setArticles}
+                  order={order}
+                  sort={sort}
+                />
+              </>
             }
           />
         </Route>

@@ -24,10 +24,12 @@ export const SingleTopic = ({ articles, setArticles, sort, order }) => {
   if (error) return <ErrorPage message={error} />;
   if (isLoading) return <p>Loading...</p>;
   return (
-    <ArticleList
-      topic_slug={topic_slug}
-      articles={articles}
-      isLoading={isLoading}
-    />
+    <section>
+      <ArticleList
+        topic_slug={topic_slug}
+        articles={articles}
+        isLoading={isLoading}
+      />
+    </section>
   );
 };

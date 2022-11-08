@@ -9,6 +9,7 @@ import '../stylesheets/App.css';
 export const MainNav = ({ setSort, setOrder }) => {
   const [topics, setTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     getTopics().then(({ topics }) => {
@@ -17,37 +18,29 @@ export const MainNav = ({ setSort, setOrder }) => {
     });
   }, []);
 
-  const sortOptions = [
-    { value: 'created_at', text: 'Date' },
-    { value: 'votes', text: 'Votes' },
-    { value: 'comment_count', text: 'Comments' },
-  ];
-
-  const orderOptions = [
-    { value: 'DESC', text: 'DESC' },
-    { value: 'ASC', text: 'ASC' },
-  ];
-
-  const handleSort = (event) => {
-    setSort(event);
-  };
-
-  const handleOrder = (event) => {
-    setOrder(event);
-  };
-
   if (isLoading) return <p>Loading Navigation Menu....</p>;
   return (
-    <Navbar bg="primary" expand="lg" className="py-2">
+    <Navbar bg="info" expand="lg" className="py-2" expanded={expanded}>
       <Container fluid>
         <LinkContainer to="/">
           <Navbar.Brand>News</Navbar.Brand>
         </LinkContainer>
-        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Toggle
+          aria-controls="navbarScroll"
+          onClick={() => {
+            setExpanded(expanded ? false : 'expanded');
+          }}
+        />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto">
             <LinkContainer to="/articles">
-              <Nav.Link>All Articles</Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  setExpanded(false);
+                }}
+              >
+                All Articles
+              </Nav.Link>
             </LinkContainer>
             <NavDropdown title={<span>Topics</span>} id="basic-nav-dropdown">
               {topics.map((topic) => {
@@ -56,45 +49,15 @@ export const MainNav = ({ setSort, setOrder }) => {
                     key={topic.slug}
                     to={`/articles/topic/${topic.slug}`}
                   >
-                    <NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={() => {
+                        setExpanded(false);
+                      }}
+                    >
                       {topic.slug.slice(0, 1).toUpperCase() +
                         topic.slug.slice(1)}
                     </NavDropdown.Item>
                   </LinkContainer>
-                );
-              })}
-            </NavDropdown>
-            <NavDropdown
-              title={<span>Sort</span>}
-              id="basic-nav-dropdown"
-              onSelect={handleSort}
-            >
-              {sortOptions.map((option) => {
-                return (
-                  <NavDropdown.Item
-                    key={option.value}
-                    eventKey={option.value}
-                    value={option.value}
-                  >
-                    {option.text}
-                  </NavDropdown.Item>
-                );
-              })}
-            </NavDropdown>
-            <NavDropdown
-              title={<span>Order</span>}
-              id="basic-nav-dropdown"
-              onSelect={handleOrder}
-            >
-              {orderOptions.map((option) => {
-                return (
-                  <NavDropdown.Item
-                    key={option.value}
-                    eventKey={option.value}
-                    value={option.value}
-                  >
-                    {option.text}
-                  </NavDropdown.Item>
                 );
               })}
             </NavDropdown>
