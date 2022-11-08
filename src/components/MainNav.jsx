@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { LinkContainer } from 'react-router-bootstrap';
+import '../stylesheets/App.css';
 export const MainNav = ({ setSort, setOrder }) => {
   const [topics, setTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -37,10 +38,10 @@ export const MainNav = ({ setSort, setOrder }) => {
 
   if (isLoading) return <p>Loading Navigation Menu....</p>;
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="primary" expand="lg" className="py-2">
       <Container fluid>
         <LinkContainer to="/">
-          <Navbar.Brand>BB News</Navbar.Brand>
+          <Navbar.Brand>News</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">

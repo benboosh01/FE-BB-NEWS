@@ -93,51 +93,50 @@ export const SingleArticle = () => {
   return (
     <div className="mt-4 d-flex flex-column align-items-center">
       <div
-        style={{ maxWidth: '576px' }}
-        className="d-flex flex-column justify-content-center flex-md-row"
+        style={{ maxWidth: '768px' }}
+        className="d-flex flex-column justify-content-center flex-md-row border rounded"
       >
         <div className="d-flex flex-column align-items-center">
-          <div className="bg-light p-4 d-flex flex-column gap-3">
-            <h2>{article.title}</h2>
-            <div
-              style={{ width: '80px' }}
-              className="border rounded py-2 ps-3 border-primary"
-            >
-              <a
-                href="#comments-list"
-                className="text-decoration-none text-primary"
-              >
-                <Icon.Chat size={25} /> {article.comment_count}
-              </a>
+          <div className="p-4 d-flex flex-column gap-2">
+            <h2 className="border-bottom py-3 ps-2 bg-light">
+              {article.title}
+            </h2>
+            <div className="d-flex align-items-center gap-2 border-bottom pb-3">
+              <div style={{ width: '50px' }} className="py-1">
+                <a
+                  href="#comments-list"
+                  className="text-decoration-none text-primary"
+                >
+                  <Icon.Chat size={20} /> {article.comment_count}
+                </a>
+              </div>
+              <p className="m-0 small">{article.author}</p>
+              <p className="m-0 small">
+                {article.created_at.slice(8, 10) +
+                  '/' +
+                  article.created_at.slice(5, 7) +
+                  '/' +
+                  article.created_at.slice(0, 4)}
+              </p>
             </div>
 
             <p className="my-1">{article.body}</p>
             <div>
               <div className="d-flex gap-1">
-                <span class="visually-hidden">votes: {article.votes}</span>
+                <span className="visually-hidden">votes: {article.votes}</span>
                 {article.votes >= 0 ? (
                   <div
-                    style={{ width: '60px' }}
-                    className="d-flex align-items-center py-2 px-3 border rounded bg-success"
+                    style={{ width: '45px' }}
+                    className="d-flex align-items-center py-1 px-2 border rounded bg-success"
                   >
-                    <p
-                      style={{ fontSize: '1.25rem' }}
-                      className="text-white m-0 ps-2"
-                    >
-                      {article.votes}
-                    </p>
+                    <p className="text-white m-0 ps-2">{article.votes}</p>
                   </div>
                 ) : (
                   <div
-                    style={{ width: '60px' }}
-                    className="d-flex align-items-center py-2 px-3 border rounded bg-danger"
+                    style={{ width: '45px' }}
+                    className="d-flex align-items-center py-1 px-2 border rounded bg-danger"
                   >
-                    <p
-                      style={{ fontSize: '1.25rem' }}
-                      className="text-white m-0"
-                    >
-                      {article.votes}
-                    </p>
+                    <p className="text-white m-0 ps-1">{article.votes}</p>
                   </div>
                 )}
 
@@ -147,8 +146,8 @@ export const SingleArticle = () => {
                   onClick={handleVote}
                   id="vote-down"
                 >
-                  <span class="visually-hidden">vote down</span>
-                  <Icon.HandThumbsDown color="white" size={30} />
+                  <span className="visually-hidden">vote down</span>
+                  <Icon.HandThumbsDown color="white" size={20} />
                 </Button>
                 <Button
                   variant="success"
@@ -156,70 +155,52 @@ export const SingleArticle = () => {
                   onClick={handleVote}
                   id="vote-up"
                 >
-                  <span class="visually-hidden">vote up</span>
-                  <Icon.HandThumbsUp color="white" size={30} />
+                  <span className="visually-hidden">vote up</span>
+                  <Icon.HandThumbsUp color="white" size={20} />
                 </Button>
               </div>
             </div>
           </div>
         </div>
-        <div
-          style={{ minWidth: '175px' }}
-          className="d-flex flex-column p-4 bg-secondary text-light align-items-center justify-content-end"
-        >
-          {users.map((user) => {
-            if (user.username === article.author) {
-              return (
-                <img
-                  style={{ width: '90px' }}
-                  className="rounded-circle"
-                  src={user.avatar_url}
-                />
-              );
-            }
-          })}
-          <p className="mt-4">{article.author}</p>
-          <p>
-            {article.created_at.slice(8, 10) +
-              '/' +
-              article.created_at.slice(5, 7) +
-              '/' +
-              article.created_at.slice(0, 4)}
-          </p>
-        </div>
       </div>
       <div
-        style={{ maxWidth: '576px' }}
+        style={{ maxWidth: '768px' }}
         className="d-flex flex-column align-items-center"
       >
-        <div className="d-flex flex-column ">
+        <div className="d-flex flex-column align-items-center border rounded mt-3 p-2">
           <div className="mt-3">
-            <h3>Comments</h3>
+            <h4 className="text-center">Comments</h4>
           </div>
           <form
             action="submit"
-            className="d-flex flex-column"
+            className="d-flex flex-column w-100 gap-2 pb-4 px-3"
             onSubmit={handleComment}
+            style={{ maxWidth: '768px' }}
           >
             <label htmlFor="add-comment">Add Comment:</label>
             <textarea
               id="add-comment"
-              rows={5}
+              rows={4}
               onChange={handleChange}
               value={newComment}
               required
+              className="border rounded"
             />
-            <button
+            <Button
               className="comment-btn"
               type="submit"
               id="comment-btn"
               disabled={disable}
+              style={{ width: '200px' }}
             >
-              Submit
-            </button>
+              Post your comment
+            </Button>
           </form>
-          <hr className="comment-form-divider" />
-          <ul className="comments-list" id="comments-list">
+          <ul
+            className="m-0 px-3"
+            id="comments-list"
+            style={{ maxWidth: '768px' }}
+          >
             {comments.map((comment) => {
               return (
                 <CommentCard
