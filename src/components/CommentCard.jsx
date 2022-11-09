@@ -1,14 +1,12 @@
 import Button from 'react-bootstrap/Button';
 import { UserContext } from '../contexts/User';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { deleteComment, getArticleComments } from '../utilities/api';
 
 export const CommentCard = ({ comment, setComments, article_id }) => {
   const { loggedInUser } = useContext(UserContext);
-  const [disable, setDisable] = useState(false);
 
   const handleBtn = (event) => {
-    setDisable(true);
     const comment_id = event.target.value;
     const username = event.target.id;
     if (loggedInUser.username === username) {
@@ -30,17 +28,24 @@ export const CommentCard = ({ comment, setComments, article_id }) => {
 
   return (
     <li className="comment-card">
-      <h4>{comment.author}</h4>
-      <p>{comment.body}</p>
-      <Button
-        variant="danger"
-        onClick={handleBtn}
-        value={comment.comment_id}
-        id={comment.author}
-        disabled={loggedInUser.username === comment.author ? disable : true}
-      >
-        Del
-      </Button>
+      <h6>{comment.author}</h6>
+      <div className="d-flex justify-content-between align-items-start gap-2">
+        <p className="small">{comment.body}</p>
+        {loggedInUser.username === comment.author ? (
+          <Button
+            size="sm"
+            variant="outline-danger"
+            onClick={handleBtn}
+            value={comment.comment_id}
+            id={comment.author}
+          >
+            Del
+          </Button>
+        ) : (
+          false
+        )}
+      </div>
+
       <hr />
     </li>
   );

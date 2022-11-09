@@ -16,18 +16,16 @@ export const Home = () => {
 
   if (isLoading) return <p>Loading...</p>;
   return (
-    <section className="articles-section">
-      <ul className="home-article-list">
-        {homeArticles.map((article, i) => {
-          return (
-            <ArticleCard
-              key={article.article_id}
-              className="article-item"
-              article={article}
-            />
-          );
-        })}
-      </ul>
-    </section>
+    <ul className="d-flex flex-wrap justify-content-center gap-3 mt-4">
+      {homeArticles.map((article) => {
+        return (
+          <ArticleCard
+            key={article.article_id}
+            className="article-item"
+            article={article}
+          />
+        );
+      })}
+    </ul>
   );
 };
