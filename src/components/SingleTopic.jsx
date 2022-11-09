@@ -19,7 +19,7 @@ export const SingleTopic = ({ articles, setArticles, sort, order }) => {
       .catch((err) => {
         setError(err.response.data.msg);
       });
-  }, [topic_slug, sort, order]);
+  }, [topic_slug, sort, order, setArticles]);
 
   if (error) return <ErrorPage message={error} />;
   if (isLoading) return <p>Loading...</p>;

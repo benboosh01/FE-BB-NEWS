@@ -11,7 +11,7 @@ export const Articles = ({ articles, setArticles, order, sort }) => {
       setArticles(articles);
       setIsLoading(false);
     });
-  }, [order, sort]);
+  }, [order, sort, setArticles]);
 
   if (isLoading) return <p>Loading...</p>;
   return (

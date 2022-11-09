@@ -5,7 +5,6 @@ import {
   getArticleComments,
   patchArticleVotes,
   postArticleComment,
-  getUsers,
 } from '../utilities/api';
 import { CommentCard } from './CommentCard';
 import axios from 'axios';
@@ -23,16 +22,14 @@ export const SingleArticle = () => {
   const { loggedInUser } = useContext(UserContext);
   const [disable, setDisable] = useState(false);
   const [error, setError] = useState(null);
-  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     axios
-      .all([getArticle(article_id), getArticleComments(article_id), getUsers()])
+      .all([getArticle(article_id), getArticleComments(article_id)])
       .then(
         axios.spread((...allData) => {
           setArticle(allData[0].article);
           setComments(allData[1].comments);
-          setUsers(allData[2].users);
           setIsLoading(false);
         })
       )

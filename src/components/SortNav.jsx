@@ -1,5 +1,4 @@
 import Form from 'react-bootstrap/Form';
-import '../stylesheets/App.css';
 export const SortNav = ({ setSort, setOrder, sortOptions, orderOptions }) => {
   const handleSort = (event) => {
     setSort(event.target.value);

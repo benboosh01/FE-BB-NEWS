@@ -1,5 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './stylesheets/App.css';
 import { Articles } from './components/Articles';
 import { Routes, Route } from 'react-router-dom';
 import { SingleArticle } from './components/SingleArticle';
