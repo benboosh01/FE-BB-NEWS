@@ -1,68 +1,62 @@
-import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Form from 'react-bootstrap/Form';
 import '../stylesheets/App.css';
-export const SortNav = ({ setSort, setOrder }) => {
-  const sortOptions = [
-    { value: 'created_at', text: 'Date' },
-    { value: 'votes', text: 'Votes' },
-    { value: 'comment_count', text: 'Comments' },
-  ];
-
-  const orderOptions = [
-    { value: 'DESC', text: 'DESC' },
-    { value: 'ASC', text: 'ASC' },
-  ];
-
+export const SortNav = ({ setSort, setOrder, sortOptions, orderOptions }) => {
   const handleSort = (event) => {
-    setSort(event);
+    setSort(event.target.value);
   };
 
   const handleOrder = (event) => {
-    setOrder(event);
+    setOrder(event.target.value);
   };
 
   return (
-    <Navbar bg="light">
-      <Container fluid>
-        <Nav className="m-auto">
-          <NavDropdown
-            title={<span>Sort</span>}
-            id="basic-nav-dropdown"
-            onSelect={handleSort}
-          >
-            {sortOptions.map((option) => {
-              return (
-                <NavDropdown.Item
-                  key={option.value}
-                  eventKey={option.value}
-                  value={option.value}
-                >
-                  {option.text}
-                </NavDropdown.Item>
-              );
-            })}
-          </NavDropdown>
-          <NavDropdown
-            title={<span>Order</span>}
-            id="basic-nav-dropdown"
-            onSelect={handleOrder}
-          >
-            {orderOptions.map((option) => {
-              return (
-                <NavDropdown.Item
-                  key={option.value}
-                  eventKey={option.value}
-                  value={option.value}
-                >
-                  {option.text}
-                </NavDropdown.Item>
-              );
-            })}
-          </NavDropdown>
-        </Nav>
-      </Container>
-    </Navbar>
+    <section className="d-flex align-items-center justify-content-center text-end pt-3">
+      <div className="d-flex justify-content-end">
+        <label
+          htmlFor="selectSort"
+          style={{ width: '100px' }}
+          className="pe-2 pt-1"
+        >
+          Sort By:
+        </label>
+        <Form.Select
+          onChange={handleSort}
+          size="sm"
+          id="selectSort"
+          style={{ width: '100px' }}
+        >
+          {sortOptions.map((option) => {
+            return (
+              <option key={option.value} value={option.value}>
+                {option.text}
+              </option>
+            );
+          })}
+        </Form.Select>
+      </div>
+      <div className="d-flex justify-content-start">
+        <label
+          htmlFor="selectOrder"
+          style={{ width: '100px' }}
+          className="pe-2 pt-1"
+        >
+          Order By:
+        </label>
+        <Form.Select
+          onChange={handleOrder}
+          size="sm"
+          id="selectOrder"
+          style={{ width: '100px' }}
+        >
+          {orderOptions.map((option) => {
+            return (
+              <option key={option.value} value={option.value}>
+                {option.text}
+              </option>
+            );
+          })}
+        </Form.Select>
+      </div>
+    </section>
   );
 };

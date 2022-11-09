@@ -22,7 +22,12 @@ export const MainNav = ({ setSort, setOrder }) => {
   return (
     <Navbar bg="info" expand="lg" className="py-2" expanded={expanded}>
       <Container fluid>
-        <LinkContainer to="/">
+        <LinkContainer
+          to="/"
+          onClick={() => {
+            setExpanded(false);
+          }}
+        >
           <Navbar.Brand>News</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle

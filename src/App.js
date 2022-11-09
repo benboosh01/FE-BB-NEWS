@@ -15,6 +15,17 @@ function App() {
   const [sort, setSort] = useState('created_at');
   const [order, setOrder] = useState('DESC');
 
+  const sortOptions = [
+    { value: 'created_at', text: 'Date' },
+    { value: 'votes', text: 'Votes' },
+    { value: 'comment_count', text: 'Comments' },
+  ];
+
+  const orderOptions = [
+    { value: 'DESC', text: 'DESC' },
+    { value: 'ASC', text: 'ASC' },
+  ];
+
   return (
     <div className="App">
       <MainNav
@@ -33,7 +44,12 @@ function App() {
             index
             element={
               <>
-                <SortNav setSort={setSort} setOrder={setOrder} />
+                <SortNav
+                  setSort={setSort}
+                  setOrder={setOrder}
+                  sortOptions={sortOptions}
+                  orderOptions={orderOptions}
+                />
                 <Articles
                   articles={articles}
                   setArticles={setArticles}
@@ -50,7 +66,12 @@ function App() {
             path="topic/:topic_slug"
             element={
               <>
-                <SortNav setSort={setSort} setOrder={setOrder} />
+                <SortNav
+                  setSort={setSort}
+                  setOrder={setOrder}
+                  sortOptions={sortOptions}
+                  orderOptions={orderOptions}
+                />
                 <SingleTopic
                   articles={articles}
                   setArticles={setArticles}
