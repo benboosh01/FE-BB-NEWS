@@ -11,10 +11,8 @@ export const CommentCard = ({ comment, setComments, article_id }) => {
     const username = event.target.id;
     if (loggedInUser.username === username) {
       setComments((currComments) => {
-        return currComments.filter((comment) => {
-          if (comment.comment_id !== parseInt(comment_id)) {
-            return comment;
-          }
+        currComments.filter((comment) => {
+          return comment.comment_id !== parseInt(comment_id);
         });
       });
       deleteComment(comment_id).catch((err) => {
