@@ -27,7 +27,7 @@ export const MainNav = ({ setSort, setOrder }) => {
             setExpanded(false);
           }}
         >
-          <Navbar.Brand>News</Navbar.Brand>
+          <Navbar.Brand>BB News</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle
           aria-controls="navbarScroll"

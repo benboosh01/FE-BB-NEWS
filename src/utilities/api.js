@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const newsApi = axios.create({
-  baseURL: 'https://be-bb-news.herokuapp.com/api/',
+  baseURL: 'https://busy-jade-pig-ring.cyclic.app/api/',
 });
 
 export const getArticles = (topic, sortBy = 'created_at', order = 'DESC') => {
