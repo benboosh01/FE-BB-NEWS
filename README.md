@@ -4,6 +4,8 @@ A front end news website built using react. The app was created to make use of m
 
 ## HOSTED VERSION
 
+https://be-bb-news.cyclic.app
+
 ## SETUP --->>>
 
 ### SYSTEM REQUIREMENTS
