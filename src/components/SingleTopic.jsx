@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getArticles } from '../utilities/api';
-import { ArticleList } from './ArticleList';
-import { ErrorPage } from './ErrorPage';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { getArticles } from "../utilities/api";
+import { ArticleList } from "./ArticleList";
+import { ErrorPage } from "./ErrorPage";
+import { Loading } from "./Loading";
 
 export const SingleTopic = ({ articles, setArticles, sort, order }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +23,7 @@ export const SingleTopic = ({ articles, setArticles, sort, order }) => {
   }, [topic_slug, sort, order, setArticles]);
 
   if (error) return <ErrorPage message={error} />;
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
   return (
     <section>
       <ArticleList

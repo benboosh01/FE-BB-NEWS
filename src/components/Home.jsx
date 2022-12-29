@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import { getArticles } from '../utilities/api';
-import { ArticleCard } from './ArticleCard';
+import { useState, useEffect } from "react";
+import { getArticles } from "../utilities/api";
+import { ArticleCard } from "./ArticleCard";
+import { Loading } from "./Loading";
 
 export const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,7 +15,7 @@ export const Home = () => {
     });
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
   return (
     <ul className="d-flex flex-wrap justify-content-center gap-3 mt-4">
       {homeArticles.map((article) => {

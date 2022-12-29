@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
-import { getTopics } from '../utilities/api';
-import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { LinkContainer } from 'react-router-bootstrap';
+import { useState, useEffect } from "react";
+import { getTopics } from "../utilities/api";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { LinkContainer } from "react-router-bootstrap";
+import { Loading } from "./Loading";
+
 export const MainNav = ({ setSort, setOrder }) => {
   const [topics, setTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +19,7 @@ export const MainNav = ({ setSort, setOrder }) => {
     });
   }, []);
 
-  if (isLoading) return <p>Loading Navigation Menu....</p>;
+  if (isLoading) return <Loading />;
   return (
     <Navbar bg="info" expand="lg" className="py-2" expanded={expanded}>
       <Container fluid>
@@ -32,7 +34,7 @@ export const MainNav = ({ setSort, setOrder }) => {
         <Navbar.Toggle
           aria-controls="navbarScroll"
           onClick={() => {
-            setExpanded(expanded ? false : 'expanded');
+            setExpanded(expanded ? false : "expanded");
           }}
         />
         <Navbar.Collapse id="navbarScroll">

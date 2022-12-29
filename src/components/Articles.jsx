@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import { getArticles } from '../utilities/api';
-import { ArticleList } from './ArticleList';
+import { useState, useEffect } from "react";
+import { getArticles } from "../utilities/api";
+import { ArticleList } from "./ArticleList";
+import { Loading } from "./Loading";
 
 export const Articles = ({ articles, setArticles, order, sort }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +14,7 @@ export const Articles = ({ articles, setArticles, order, sort }) => {
     });
   }, [order, sort, setArticles]);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
   return (
     <section>
       <ArticleList articles={articles} />;
