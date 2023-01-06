@@ -1,23 +1,24 @@
-import { useParams } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
+import { useParams } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
 import {
   getArticle,
   getArticleComments,
   patchArticleVotes,
   postArticleComment,
-} from '../utilities/api';
-import { CommentCard } from './CommentCard';
-import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import { UserContext } from '../contexts/User';
-import { ErrorPage } from './ErrorPage';
-import * as Icon from 'react-bootstrap-icons';
+} from "../utilities/api";
+import { CommentCard } from "./CommentCard";
+import axios from "axios";
+import Button from "react-bootstrap/Button";
+import { UserContext } from "../contexts/User";
+import { ErrorPage } from "./ErrorPage";
+import * as Icon from "react-bootstrap-icons";
+import { Loading } from "./Loading";
 
 export const SingleArticle = () => {
   const [article, setArticle] = useState({});
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [newComment, setNewComment] = useState('');
+  const [newComment, setNewComment] = useState("");
   const { article_id } = useParams();
   const { loggedInUser } = useContext(UserContext);
   const [disable, setDisable] = useState(false);
@@ -41,7 +42,7 @@ export const SingleArticle = () => {
   const handleVote = (event) => {
     const article_id = event.currentTarget.value;
     const vote = event.currentTarget.id;
-    if (vote === 'vote-up') {
+    if (vote === "vote-up") {
       setArticle((currArticle) => {
         return { ...currArticle, votes: currArticle.votes + 1 };
       });
@@ -79,18 +80,18 @@ export const SingleArticle = () => {
         });
       })
       .then(() => {
-        setNewComment('');
+        setNewComment("");
         setDisable(false);
       });
   };
 
   if (error) return <ErrorPage message={error} />;
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="mt-4 d-flex flex-column align-items-center">
       <div
-        style={{ maxWidth: '768px' }}
+        style={{ maxWidth: "768px" }}
         className="d-flex flex-column justify-content-center flex-md-row border rounded"
       >
         <div className="d-flex flex-column align-items-center">
@@ -99,7 +100,7 @@ export const SingleArticle = () => {
               {article.title}
             </h2>
             <div className="d-flex align-items-center gap-2 border-bottom pb-3">
-              <div style={{ width: '50px' }} className="py-1">
+              <div style={{ width: "50px" }} className="py-1">
                 <a
                   href="#comments-list"
                   className="text-decoration-none text-primary"
@@ -110,9 +111,9 @@ export const SingleArticle = () => {
               <p className="m-0 small">{article.author}</p>
               <p className="m-0 small">
                 {article.created_at.slice(8, 10) +
-                  '/' +
+                  "/" +
                   article.created_at.slice(5, 7) +
-                  '/' +
+                  "/" +
                   article.created_at.slice(0, 4)}
               </p>
             </div>
@@ -123,14 +124,14 @@ export const SingleArticle = () => {
                 <span className="visually-hidden">votes: {article.votes}</span>
                 {article.votes >= 0 ? (
                   <div
-                    style={{ width: '45px' }}
+                    style={{ width: "45px" }}
                     className="d-flex align-items-center py-1 px-2 border rounded bg-success"
                   >
                     <p className="text-white m-0 ps-2">{article.votes}</p>
                   </div>
                 ) : (
                   <div
-                    style={{ width: '45px' }}
+                    style={{ width: "45px" }}
                     className="d-flex align-items-center py-1 px-2 border rounded bg-danger"
                   >
                     <p className="text-white m-0 ps-1">{article.votes}</p>
@@ -161,7 +162,7 @@ export const SingleArticle = () => {
         </div>
       </div>
       <div
-        style={{ maxWidth: '768px' }}
+        style={{ maxWidth: "768px" }}
         className="d-flex flex-column align-items-center"
       >
         <div className="d-flex flex-column align-items-center border rounded mt-3 p-2">
@@ -172,7 +173,7 @@ export const SingleArticle = () => {
             action="submit"
             className="d-flex flex-column w-100 gap-2 pb-4 px-3"
             onSubmit={handleComment}
-            style={{ maxWidth: '768px' }}
+            style={{ maxWidth: "768px" }}
           >
             <label htmlFor="add-comment">Add Comment:</label>
             <textarea
@@ -188,7 +189,7 @@ export const SingleArticle = () => {
               type="submit"
               id="comment-btn"
               disabled={disable}
-              style={{ width: '200px' }}
+              style={{ width: "200px" }}
             >
               Post your comment
             </Button>
@@ -196,7 +197,7 @@ export const SingleArticle = () => {
           <ul
             className="m-0 px-3"
             id="comments-list"
-            style={{ maxWidth: '768px' }}
+            style={{ maxWidth: "768px" }}
           >
             {comments.map((comment) => {
               return (
