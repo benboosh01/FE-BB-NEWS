@@ -17,16 +17,19 @@ export const Home = () => {
 
   if (isLoading) return <Loading />;
   return (
-    <ul className="d-flex flex-wrap justify-content-center gap-3 mt-4">
-      {homeArticles.map((article) => {
-        return (
-          <ArticleCard
-            key={article.article_id}
-            className="article-item"
-            article={article}
-          />
-        );
-      })}
-    </ul>
+    <section>
+      <h2 className="text-center mt-4 mb-4">Latest Articles</h2>
+      <ul className="d-flex flex-wrap justify-content-center gap-3 mt-4">
+        {homeArticles.map((article) => {
+          return (
+            <ArticleCard
+              key={article.article_id}
+              className="article-item"
+              article={article}
+            />
+          );
+        })}
+      </ul>
+    </section>
   );
 };
